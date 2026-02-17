@@ -1,3 +1,19 @@
+resource "aws_identitystore_user" "admin-user" {
+  identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
+
+  display_name = var.sso_admin_display_name_to_attach_to_account
+  user_name    = var.sso_admin_user_to_attach_to_account
+
+  name {
+    given_name  = var.sso_admin_name_to_attach_to_account
+    family_name = var.sso_admin_family_name_to_attach_to_account
+  }
+
+  emails {
+    value = var.sso_admin_email_to_attach_to_account
+  }
+}
+
 resource "aws_organizations_account" "account" {
   email                      = var.owner_email
   name                       = "deploy-${var.environment}"
