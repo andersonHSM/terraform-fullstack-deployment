@@ -1,3 +1,4 @@
+
 # resource "aws_iam_role" "terraform_s3_full_access_role" {
 #   name               = "terraform-s3-full-access-role"
 #   assume_role_policy = data.aws_iam_policy_document.allow_terraform_assume_role_policy.json
@@ -20,9 +21,11 @@ resource "aws_iam_user" "terraform_user" {
   tags = {
     "providedBy" = var.infrastructure_provider
   }
+  provider = aws.target
 }
 
 resource "aws_iam_role" "terraform_assume_role_role" {
   name               = "terraform_assume_role_role"
   assume_role_policy = data.aws_iam_policy_document.allow_terraform_user_to_assume_role_policy.json
+  provider           = aws.target
 }

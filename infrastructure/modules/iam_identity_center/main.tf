@@ -1,3 +1,4 @@
+
 resource "aws_organizations_account" "account" {
   email                      = var.owner_email
   name                       = "deploy-${var.environment}"
