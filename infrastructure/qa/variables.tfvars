@@ -1,7 +1,0 @@
-current_environment                         = "qa"
-owner_email                                 = "andersonmenezes.dev+deployment-qa+1@gmail.com"
-sso_admin_username_to_attach_to_account     = "anderson_admin"
-sso_admin_family_name_to_attach_to_account  = "Menezes"
-sso_admin_name_to_attach_to_account         = "Anderson"
-sso_admin_email_to_attach_to_account        = "andersonmenezes.dev@gmail.com"
-sso_admin_display_name_to_attach_to_account = "Anderson Menezes"
