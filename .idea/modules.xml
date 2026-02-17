@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/terrfaform-tutorial.iml" filepath="$PROJECT_DIR$/.idea/terrfaform-tutorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/terrfaform-fullstack-deployment.iml" filepath="$PROJECT_DIR$/.idea/terrfaform-fullstack-deployment.iml" />
     </modules>
   </component>
 </project>
