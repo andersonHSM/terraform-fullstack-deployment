@@ -20,6 +20,7 @@ resource "aws_identitystore_group" "admin_group" {
 
 resource "aws_identitystore_user" "admin_user" {
   identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
+  count             = length(data.aws_identitystore_user.admin_user) == 0 ? 1 : 0
 
   display_name = var.sso_admin_display_name_to_attach_to_account
   user_name    = var.sso_admin_username_to_attach_to_account
@@ -39,7 +40,7 @@ resource "aws_identitystore_user" "admin_user" {
 resource "aws_identitystore_group_membership" "assign_admin_to_group" {
   identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
   group_id          = aws_identitystore_group.admin_group.group_id
-  member_id         = aws_identitystore_user.admin_user.user_id
+  member_id         = data.aws_identitystore_user.admin_user.user_id
   depends_on        = [aws_identitystore_user.admin_user]
 }
 
