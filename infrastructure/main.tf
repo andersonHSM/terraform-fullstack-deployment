@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws" # Specify the source of the AWS provider
-      version = "~> 6.17.0"     # Use a version of the AWS provider that is compatible with version
+      version = "~> 6.32"     # Use a version of the AWS provider that is compatible with version
     }
   }
 }
@@ -22,4 +22,9 @@ module "accounts" {
   sso_admin_email_to_attach_to_account        = var.sso_admin_email_to_attach_to_account
   sso_admin_family_name_to_attach_to_account  = var.sso_admin_family_name_to_attach_to_account
   sso_admin_name_to_attach_to_account         = var.sso_admin_name_to_attach_to_account
+}
+
+module "iam" {
+  source         = "./modules/iam"
+  aws_account_id = var.account_id
 }

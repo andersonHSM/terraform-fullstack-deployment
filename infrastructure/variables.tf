@@ -42,3 +42,9 @@ variable "sso_admin_family_name_to_attach_to_account" {
   description = "The SSO Admin family name for the user"
   nullable    = false
 }
+
+variable "account_id" {
+  type        = string
+  description = "The account to work on"
+  nullable    = true
+}
