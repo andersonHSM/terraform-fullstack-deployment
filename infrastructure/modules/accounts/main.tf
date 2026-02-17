@@ -13,6 +13,7 @@ resource "aws_ssoadmin_permission_set" "admin_access" {
 }
 
 resource "aws_identitystore_group" "admin_group" {
+  depends_on        = [aws_organizations_account.account]
   display_name      = "AdminGroup"
   identity_store_id = "Admin Group"
 }
@@ -32,7 +33,7 @@ resource "aws_identitystore_user" "admin_user" {
     value = var.sso_admin_email_to_attach_to_account
   }
 
-  depends_on = [aws_organizations_account.account]
+  depends_on = [aws_organizations_account.account, aws_identitystore_group.admin_group]
 }
 
 resource "aws_identitystore_group_membership" "assign_admin_to_group" {
@@ -43,6 +44,7 @@ resource "aws_identitystore_group_membership" "assign_admin_to_group" {
 }
 
 resource "aws_ssoadmin_account_assignment" "basic_admin_account" {
+  depends_on         = [aws_organizations_account.account]
   instance_arn       = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
   permission_set_arn = aws_ssoadmin_permission_set.admin_access.arn
 
