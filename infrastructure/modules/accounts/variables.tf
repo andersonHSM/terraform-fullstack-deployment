@@ -9,7 +9,7 @@ variable "owner_email" {
   nullable    = true
 }
 
-variable "sso_admin_user_to_attach_to_account" {
+variable "sso_admin_username_to_attach_to_account" {
   type        = string
   description = "The IAM Identity Center user to attach to the new account form admin access"
   nullable    = false

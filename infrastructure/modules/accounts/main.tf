@@ -15,14 +15,14 @@ resource "aws_ssoadmin_permission_set" "admin_access" {
 resource "aws_identitystore_group" "admin_group" {
   depends_on        = [aws_organizations_account.account]
   display_name      = "AdminGroup"
-  identity_store_id = "Admin Group"
+  identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
 }
 
 resource "aws_identitystore_user" "admin_user" {
   identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
 
   display_name = var.sso_admin_display_name_to_attach_to_account
-  user_name    = var.sso_admin_user_to_attach_to_account
+  user_name    = var.sso_admin_username_to_attach_to_account
 
   name {
     given_name  = var.sso_admin_name_to_attach_to_account

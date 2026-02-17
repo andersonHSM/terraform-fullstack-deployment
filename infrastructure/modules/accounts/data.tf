@@ -7,7 +7,7 @@ data "aws_identitystore_user" "admin_user" {
   alternate_identifier {
     unique_attribute {
       attribute_path  = "UserName"
-      attribute_value = "andersonmenezes_admin"
+      attribute_value = var.sso_admin_username_to_attach_to_account
     }
   }
 }
