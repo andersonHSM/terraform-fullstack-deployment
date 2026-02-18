@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region  = local.default_region
+  region = local.default_region
 }
 
 module "accounts" {
@@ -25,6 +25,5 @@ module "accounts" {
 }
 
 module "iam" {
-  source         = "./modules/iam"
-  aws_account_id = var.account_id
+  source = "./modules/iam"
 }

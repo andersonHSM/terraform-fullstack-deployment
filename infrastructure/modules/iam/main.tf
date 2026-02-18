@@ -1,19 +1,3 @@
-
-# resource "aws_iam_role" "terraform_s3_full_access_role" {
-#   name               = "terraform-s3-full-access-role"
-#   assume_role_policy = data.aws_iam_policy_document.allow_terraform_assume_role_policy.json
-# }
-#
-# resource "aws_iam_policy" "allow_terraform_assume_role_policy" {
-#   policy = data.aws_iam_policy_document.allow_terraform_assume_role_policy.json
-# }
-#
-# resource "aws_iam_policy_attachment" "assign_assume_role_policy_to_terraform_user" {
-#   name       = "assign_assume_role_policy_to_terraform_user"
-#   policy_arn = aws_iam_policy.allow_terraform_assume_role_policy.arn
-#   roles = [aws_iam_role.terraform_s3_full_access_role.arn]
-# }
-#
 resource "aws_iam_user" "terraform_user" {
   name          = "terraform_user"
   path          = "/system/"
@@ -21,18 +5,17 @@ resource "aws_iam_user" "terraform_user" {
   tags = {
     "providedBy" = var.infrastructure_provider
   }
-  provider = aws.target
+
 }
 
 resource "aws_iam_role" "terraform_assume_role_role" {
   name               = "terraform_assume_role_role"
   assume_role_policy = data.aws_iam_policy_document.allow_terraform_user_to_assume_role_policy.json
-  provider           = aws.target
 }
 
 resource "aws_iam_role_policy" "assign_assume_role_policy_to" {
-  name     = "terraform_user_s3_full_access"
-  role     = aws_iam_role.terraform_assume_role_role.name
-  policy   = data.aws_iam_policy.s3_full_access.policy
-  provider = aws.target
+  name   = "terraform_user_s3_full_access"
+  role   = aws_iam_role.terraform_assume_role_role.name
+  policy = data.aws_iam_policy.s3_full_access.policy
+
 }
