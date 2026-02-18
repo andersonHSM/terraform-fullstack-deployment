@@ -6,7 +6,7 @@ resource "aws_organizations_account" "account" {
 }
 
 resource "aws_ssoadmin_permission_set" "admin_access" {
-  name             = "AdministratorAcces"
+  name             = "AdminAccess"
   description      = "Allow"
   instance_arn     = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
   session_duration = "PT1H"
