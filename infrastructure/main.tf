@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 module "accounts" {
-  source                                      = "./modules/iam_identity_center"
+  source                                      = "./modules/accounts"
   environment                                 = var.current_environment
   owner_email                                 = var.owner_email
   sso_admin_username_to_attach_to_account     = var.sso_admin_username_to_attach_to_account
