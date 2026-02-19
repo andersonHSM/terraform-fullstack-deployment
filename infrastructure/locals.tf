@@ -3,4 +3,5 @@ locals {
   qa             = "qa"
   prod           = "prod"
   provider       = "terraform"
+  state_bucket   = "curso-deploy-fullstack-state-2026"
 }
