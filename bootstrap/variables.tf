@@ -37,6 +37,3 @@ variable "admin_family_name" {
   type = string
 }
 
-variable "sso_admin_account_id" {
-  type = string
-}

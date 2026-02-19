@@ -75,6 +75,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state" {
 
 resource "aws_identitystore_group" "admin" {
   display_name      = "Admins"
+  description = "The group that hold administrative users with access throughout organization accounts"
   identity_store_id = data.aws_ssoadmin_instances.instances.identity_store_ids[0]
 }
 
@@ -98,7 +99,7 @@ resource "aws_identitystore_user" "admin" {
 }
 
 resource "aws_ssoadmin_permission_set" "admin" {
-  name         = "AdministratorAccess"
+  name         = "AdminAccess"
   instance_arn = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
 }
 
@@ -110,7 +111,7 @@ resource "aws_ssoadmin_account_assignment" "admin" {
   principal_id   = aws_identitystore_group.admin.group_id
   principal_type = "GROUP"
 
-  target_id   = var.sso_admin_account_id
+  target_id   = data.aws_caller_identity.identity.account_id
   target_type = "AWS_ACCOUNT"
 }
 
