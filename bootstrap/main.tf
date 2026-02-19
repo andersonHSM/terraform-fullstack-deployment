@@ -103,7 +103,7 @@ resource "aws_ssoadmin_permission_set" "admin" {
 }
 
 
-resource "aws_ssoadmin_account_assignment" "example" {
+resource "aws_ssoadmin_account_assignment" "admin" {
   instance_arn       = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
   permission_set_arn = aws_ssoadmin_permission_set.admin.arn
 
@@ -114,11 +114,11 @@ resource "aws_ssoadmin_account_assignment" "example" {
   target_type = "AWS_ACCOUNT"
 }
 
-resource "aws_ssoadmin_managed_policy_attachment" "example" {
+resource "aws_ssoadmin_managed_policy_attachment" "admin" {
   # Adding an explicit dependency on the account assignment resource will
   # allow the managed attachment to be safely destroyed prior to the removal
   # of the account assignment.
-  depends_on = [aws_ssoadmin_account_assignment.example]
+  depends_on = [aws_ssoadmin_account_assignment.admin]
 
   instance_arn       = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
   managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
