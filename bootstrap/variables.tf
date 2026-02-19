@@ -7,6 +7,7 @@ variable "region" {
 variable "state_bucket_name" {
   description = "Terraform state bucket name (globally unique)"
   type        = string
+  nullable    = true
 }
 
 variable "environment" {

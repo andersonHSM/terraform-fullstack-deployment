@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = var.state_bucket_name
+  bucket = var.state_bucket_name == "" ? local.state_bucket_name : var.state_bucket_name
 
   tags = {
     Name        = "Terraform State"
@@ -75,7 +75,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "terraform_state" {
 
 resource "aws_identitystore_group" "admin" {
   display_name      = "Admins"
-  description = "The group that hold administrative users with access throughout organization accounts"
+  description       = "The group that hold administrative users with access throughout organization accounts"
   identity_store_id = data.aws_ssoadmin_instances.instances.identity_store_ids[0]
 }
 
