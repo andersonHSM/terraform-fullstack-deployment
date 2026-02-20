@@ -13,14 +13,12 @@ variable "owner_email" {
   nullable    = false
 }
 
-variable "sso_admin_username_to_attach_to_account" {
+variable "sso_admin_group_id" {
   type        = string
-  description = "The SSO Admin username to create and assign for the given accounts"
-  nullable    = false
+  description = "The Admin Group outputted on the bootstrap setup"
 }
 
-variable "sso_admin_group_id" {
-  type = string
-  description = "The Admin Group outputted on the bootstrap setup"
-  nullable = false
+variable "sso_admin_permission_set_arn" {
+  type        = string
+  description = "The Admin Permission Set outputted on the bootstrap setup"
 }

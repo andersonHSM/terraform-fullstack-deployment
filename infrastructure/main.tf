@@ -14,13 +14,13 @@ provider "aws" {
 }
 
 module "accounts" {
-  source                                  = "./modules/accounts"
-  environment                             = var.current_environment
-  owner_email                             = var.owner_email
-  sso_admin_username_to_attach_to_account = var.sso_admin_username_to_attach_to_account
-  sso_admin_group_id                      = var.sso_admin_group_id
+  source                       = "./modules/accounts"
+  environment                  = var.current_environment
+  owner_email                  = var.owner_email
+  sso_admin_group_id           = var.sso_admin_group_id
+  sso_admin_permission_set_arn = var.sso_admin_permission_set_arn
 }
 
-module "iam" {
-  source = "./modules/iam"
-}
+# module "iam" {
+#   source = "./modules/iam"
+# }

@@ -9,20 +9,13 @@ variable "owner_email" {
   nullable    = true
 }
 
-variable "sso_admin_username_to_attach_to_account" {
-  type        = string
-  description = "The IAM Identity Center user to attach to the new account form admin access"
-  nullable    = false
-}
 
 variable "sso_admin_group_id" {
   type        = string
   description = "The Admin Group outputted on the bootstrap setup"
-  nullable    = false
 }
 
 variable "sso_admin_permission_set_arn" {
   type        = string
   description = "The Admin Permission Set outputted on the bootstrap setup"
-  nullable    = false
 }
