@@ -14,14 +14,10 @@ provider "aws" {
 }
 
 module "accounts" {
-  source                                      = "./modules/accounts"
-  environment                                 = var.current_environment
-  owner_email                                 = var.owner_email
-  sso_admin_username_to_attach_to_account     = var.sso_admin_username_to_attach_to_account
-  sso_admin_display_name_to_attach_to_account = var.sso_admin_display_name_to_attach_to_account
-  sso_admin_email_to_attach_to_account        = var.sso_admin_email_to_attach_to_account
-  sso_admin_family_name_to_attach_to_account  = var.sso_admin_family_name_to_attach_to_account
-  sso_admin_name_to_attach_to_account         = var.sso_admin_name_to_attach_to_account
+  source                                  = "./modules/accounts"
+  environment                             = var.current_environment
+  owner_email                             = var.owner_email
+  sso_admin_username_to_attach_to_account = var.sso_admin_username_to_attach_to_account
 }
 
 module "iam" {

@@ -12,38 +12,6 @@ resource "aws_ssoadmin_permission_set" "admin_access" {
   session_duration = "PT1H"
 }
 
-resource "aws_identitystore_group" "admin_group" {
-  depends_on        = [aws_organizations_account.account]
-  display_name      = "AdminGroup"
-  identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
-}
-
-resource "aws_identitystore_user" "admin_user" {
-  identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
-  count             = length(data.aws_identitystore_user.admin_user) == 0 ? 1 : 0
-
-  display_name = var.sso_admin_display_name_to_attach_to_account
-  user_name    = var.sso_admin_username_to_attach_to_account
-
-  name {
-    given_name  = var.sso_admin_name_to_attach_to_account
-    family_name = var.sso_admin_family_name_to_attach_to_account
-  }
-
-  emails {
-    value = var.sso_admin_email_to_attach_to_account
-  }
-
-  depends_on = [aws_organizations_account.account, aws_identitystore_group.admin_group]
-}
-
-resource "aws_identitystore_group_membership" "assign_admin_to_group" {
-  identity_store_id = tolist(data.aws_ssoadmin_instances.instances.identity_store_ids)[0]
-  group_id          = aws_identitystore_group.admin_group.group_id
-  member_id         = data.aws_identitystore_user.admin_user.user_id
-  depends_on        = [aws_identitystore_user.admin_user]
-}
-
 resource "aws_ssoadmin_account_assignment" "basic_admin_account" {
   depends_on         = [aws_organizations_account.account]
   instance_arn       = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
