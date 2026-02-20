@@ -18,3 +18,9 @@ variable "sso_admin_username_to_attach_to_account" {
   description = "The SSO Admin username to create and assign for the given accounts"
   nullable    = false
 }
+
+variable "sso_admin_group_id" {
+  type = string
+  description = "The Admin Group outputted on the bootstrap setup"
+  nullable = false
+}

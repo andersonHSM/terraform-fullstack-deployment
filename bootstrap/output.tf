@@ -17,3 +17,7 @@ output "admin_group_id" {
   value       = aws_identitystore_group.admin.group_id
   description = "The Admin group id"
 }
+
+output "admin_permission_set_arn" {
+  value = aws_ssoadmin_permission_set.admin.arn
+}
