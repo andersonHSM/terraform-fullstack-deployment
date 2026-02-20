@@ -12,3 +12,8 @@ output "state_bucket_arn" {
   value       = aws_s3_bucket.terraform_state.arn
   description = "S3 bucket ARN"
 }
+
+output "admin_group_id" {
+  value       = aws_identitystore_group.admin.group_id
+  description = "The Admin group id"
+}
