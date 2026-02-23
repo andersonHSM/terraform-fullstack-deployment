@@ -7,7 +7,7 @@ data "aws_s3_bucket" "state_bucket" {
 
 data "aws_iam_policy_document" "terraform_state_object_management" {
   statement {
-    sid = "Allow bucket List from this account"
+    sid = "1"
 
     actions = [
       "s3:ListBucket",
@@ -24,19 +24,18 @@ data "aws_iam_policy_document" "terraform_state_object_management" {
 
 data "aws_iam_policy_document" "cross_account_assume_role" {
   statement {
-    sid = "Allow cross account assume role"
+    sid = "1"
 
     actions = [
       "sts:AssumeRole"
     ]
 
-    effect = "Allow"
-
     principals {
-      identifiers = [aws_iam_user.terraform.arn, var.created_account_arn]
-      type        = "AWS"
+      identifiers = [
+        aws_iam_user.terraform.arn
+      ]
+      type = "AWS"
     }
-
-
+    effect = "Allow"
   }
 }
