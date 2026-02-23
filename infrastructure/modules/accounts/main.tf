@@ -5,8 +5,6 @@ resource "aws_organizations_account" "environment_account" {
   iam_user_access_to_billing = "ALLOW"
 }
 
-
-
 resource "aws_ssoadmin_account_assignment" "admin_access" {
   instance_arn       = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
   permission_set_arn = data.aws_ssoadmin_permission_set.admin_access.arn

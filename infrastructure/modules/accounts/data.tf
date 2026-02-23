@@ -1,6 +1,5 @@
 data "aws_ssoadmin_instances" "instances" {}
 
-
 data "aws_ssoadmin_permission_set" "admin_access" {
   instance_arn = tolist(data.aws_ssoadmin_instances.instances.arns)[0]
   arn          = var.sso_admin_permission_set_arn
