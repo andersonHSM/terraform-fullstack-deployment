@@ -28,12 +28,6 @@ resource "aws_iam_access_key" "terraform" {
   pgp_key = "keybase:Anderson"
 }
 
-# resource "aws_iam_policy" "assume_role" {
-#   policy = data.aws_iam_policy_document.cross_account_assume_role.json
-#   name   = "cross_account_assume_role"
-#   path   = "/system/"
-# }
-
 resource "aws_secretsmanager_secret" "access_key" {
   name = "${aws_iam_user.terraform.name}_access_key_1"
 
@@ -42,6 +36,7 @@ resource "aws_secretsmanager_secret" "access_key" {
 resource "aws_secretsmanager_secret" "secret_key" {
   name = "${aws_iam_user.terraform.name}_secret_key_1"
 }
+
 resource "aws_secretsmanager_secret_version" "secret_key" {
   secret_id     = aws_secretsmanager_secret.secret_key.id
   secret_string = aws_iam_access_key.terraform.encrypted_secret
