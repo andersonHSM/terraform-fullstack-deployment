@@ -21,6 +21,7 @@ data "aws_iam_policy_document" "terraform_management" {
     effect = "Allow"
 
     actions = [
+      "iam:CreateUser",
       "iam:ListAttachedRolePolicies",
       "iam:ListAttachedUserPolicies",
       "iam:ListCloudFrontPublicKeys",
@@ -37,6 +38,8 @@ data "aws_iam_policy_document" "terraform_management" {
       "iam:GetPolicyVersion",
       "iam:GetPolicy",
       "iam:GetRole",
+      "iam:GetUser",
+      "iam:DeleteUser",
       "iam:CreateRole",
       "iam:CreateServiceLinkedRole",
       "iam:DeleteRole",
@@ -54,19 +57,19 @@ data "aws_iam_policy_document" "terraform_management" {
       "iam:UntagRole",
     ]
 
-    condition {
-      test     = "Null"
-      values   = [true]
-      variable = "aws:AssumedRoot"
-    }
-    condition {
-      test     = "ArnLike"
-      values   = [var.management_account_user_arn]
-      variable = "aws:PrincipalArn"
-    }
+    # condition {
+    #   test     = "Null"
+    #   values   = [true]
+    #   variable = "aws:AssumedRoot"
+    # }
+    # condition {
+    #   test     = "ArnLike"
+    #   values   = [var.management_account_user_arn]
+    #   variable = "aws:PrincipalArn"
+    # }
 
     resources = [
-      aws_iam_role.management_account_assume_role.arn
+      "*"
     ]
   }
 }
