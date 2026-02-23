@@ -6,8 +6,3 @@ variable "management_account_user_arn" {
 variable "environment" {
   type = string
 }
-
-# variable "workload_account_terraform_role_to_assume" {
-#   type        = string
-#   description = "The role created on the workload account to assume"
-# }
