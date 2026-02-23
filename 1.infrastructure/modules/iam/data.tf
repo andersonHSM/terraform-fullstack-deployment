@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.33"
+    }
+  }
+}
 data "aws_caller_identity" "caller_identity" {}
 
 data "aws_s3_bucket" "state_bucket" {
