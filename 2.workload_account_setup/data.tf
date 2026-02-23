@@ -14,6 +14,7 @@ data "aws_iam_policy_document" "management_account_assume_role" {
   }
 }
 
+
 data "aws_iam_policy_document" "terraform_management" {
   statement {
     sid    = "Statement1"
@@ -63,6 +64,7 @@ data "aws_iam_policy_document" "terraform_management" {
       values   = [var.management_account_user_arn]
       variable = "aws:PrincipalArn"
     }
+
     resources = [
       aws_iam_role.management_account_assume_role.arn
     ]

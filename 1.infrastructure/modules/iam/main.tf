@@ -6,6 +6,12 @@ resource "aws_iam_user" "terraform" {
   }
 }
 
+resource "aws_iam_user_policy" "terraform_assume_role" {
+  policy = data.aws_iam_policy_document.iam_user_assume_role.json
+  user   = aws_iam_user.terraform.name
+  name   = "${aws_iam_user.terraform.name}_assume_role"
+}
+
 resource "aws_iam_role" "allow_assume_role" {
   assume_role_policy = data.aws_iam_policy_document.cross_account_assume_role.json
   path               = "/system/"

@@ -67,3 +67,16 @@ data "aws_iam_policy_document" "cross_account_assume_role" {
     effect = "Allow"
   }
 }
+
+data "aws_iam_policy_document" "iam_user_assume_role" {
+  statement {
+    sid = "1"
+    actions = [
+      "sts:AssumeRole"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+}
