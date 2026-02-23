@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "terraform_state_object_management" {
     ]
 
     resources = [
-      "${data.aws_s3_bucket.state_bucket.arn}/infrastructure/${var.environment}/*"
+      "${data.aws_s3_bucket.state_bucket.arn}/${var.environment}/infrastructure/*"
     ]
   }
   statement {
