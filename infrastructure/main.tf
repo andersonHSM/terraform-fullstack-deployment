@@ -27,5 +27,6 @@ module "iam" {
   state_bucket_name       = local.state_bucket_name
   environment             = var.current_environment
   region                  = local.default_region
-  created_account_arn      = module.accounts.created_account_arn
+  created_account_arn     = module.accounts.created_account_arn
+  created_account_id      = module.accounts.created_account_id
 }

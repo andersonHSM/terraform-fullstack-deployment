@@ -17,9 +17,18 @@ data "aws_iam_policy_document" "terraform_state_object_management" {
     ]
 
     resources = [
-      data.aws_s3_bucket.state_bucket.arn
+      data.aws_s3_bucket.state_bucket.arn,
+      "${data.aws_s3_bucket.state_bucket.arn}/*"
     ]
   }
+
+  statement {
+    sid       = "2"
+    effect    = "Allow"
+    actions   = ["s3:ListAllMyBuckets"]
+    resources = ["*"]
+  }
+
 }
 
 data "aws_iam_policy_document" "cross_account_assume_role" {
@@ -33,7 +42,8 @@ data "aws_iam_policy_document" "cross_account_assume_role" {
     principals {
       identifiers = [
         aws_iam_user.terraform.arn,
-        data.aws_caller_identity.caller_identity.arn
+        data.aws_caller_identity.caller_identity.arn,
+        var.created_account_id
       ]
       type = "AWS"
     }

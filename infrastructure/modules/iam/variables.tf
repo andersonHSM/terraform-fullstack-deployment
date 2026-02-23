@@ -26,3 +26,8 @@ variable "created_account_arn" {
   description = "The workload Account created"
   type        = string
 }
+
+variable "created_account_id" {
+  description = "The workload Account created"
+  type        = string
+}
