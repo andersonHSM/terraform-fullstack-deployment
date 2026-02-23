@@ -10,15 +10,24 @@ data "aws_iam_policy_document" "terraform_state_object_management" {
     sid = "1"
 
     actions = [
-      "s3:ListBucket",
       "s3:GetObject",
       "s3:PutObject",
       "s3:DeleteObject"
     ]
 
     resources = [
+      "${data.aws_s3_bucket.state_bucket.arn}/infrastructure/${var.environment}/*"
+    ]
+  }
+  statement {
+    sid = "3"
+
+    actions = [
+      "s3:ListBucket",
+    ]
+
+    resources = [
       data.aws_s3_bucket.state_bucket.arn,
-      "${data.aws_s3_bucket.state_bucket.arn}/*"
     ]
   }
 

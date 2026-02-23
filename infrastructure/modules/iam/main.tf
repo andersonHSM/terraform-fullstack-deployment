@@ -27,21 +27,14 @@ resource "aws_iam_access_key" "terraform" {
   user = aws_iam_user.terraform.name
 }
 
-resource "aws_secretsmanager_secret" "access_key" {
-  name = "${aws_iam_user.terraform.name}_access_key_2"
-
-}
-
 resource "aws_secretsmanager_secret" "secret_key" {
-  name = "${aws_iam_user.terraform.name}_secret_key_2"
+  name = "${aws_iam_user.terraform.name}_secret"
 }
 
 resource "aws_secretsmanager_secret_version" "secret_key" {
-  secret_id     = aws_secretsmanager_secret.secret_key.id
-  secret_string = aws_iam_access_key.terraform.secret
+  secret_id = aws_secretsmanager_secret.secret_key.id
+  secret_string = jsonencode({
+    (aws_iam_access_key.terraform.id) = aws_iam_access_key.terraform.secret
+  })
 }
 
-resource "aws_secretsmanager_secret_version" "access_key" {
-  secret_id     = aws_secretsmanager_secret.access_key.id
-  secret_string = aws_iam_access_key.terraform.id
-}
