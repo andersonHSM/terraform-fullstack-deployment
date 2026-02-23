@@ -1,4 +1,4 @@
-data "aws_ssoadmin_instances" "instance" {}
+data "aws_caller_identity" "caller_identity" {}
 
 data "aws_s3_bucket" "state_bucket" {
   bucket = var.state_bucket_name
@@ -32,7 +32,8 @@ data "aws_iam_policy_document" "cross_account_assume_role" {
 
     principals {
       identifiers = [
-        aws_iam_user.terraform.arn
+        aws_iam_user.terraform.arn,
+        data.aws_caller_identity.caller_identity.arn
       ]
       type = "AWS"
     }

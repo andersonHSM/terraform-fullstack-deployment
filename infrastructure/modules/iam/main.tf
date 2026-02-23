@@ -9,12 +9,12 @@ resource "aws_iam_user" "terraform" {
 resource "aws_iam_role" "allow_assume_role" {
   assume_role_policy = data.aws_iam_policy_document.cross_account_assume_role.json
   path               = "/system/"
-  name               = "terraform_assume_role"
+  name               = "terraform_assume_role_qa"
 }
 
 resource "aws_iam_policy" "terraform_state_object_management" {
   policy = data.aws_iam_policy_document.terraform_state_object_management.json
-  name   = "terraform_state_object_management"
+  name   = "terraform_state_object_management_qa"
   path   = "/system/"
 }
 
