@@ -24,8 +24,7 @@ resource "aws_iam_role_policy_attachment" "assume_role_s3_state_management" {
 }
 
 resource "aws_iam_access_key" "terraform" {
-  user    = aws_iam_user.terraform.name
-  pgp_key = "keybase:Anderson"
+  user = aws_iam_user.terraform.name
 }
 
 resource "aws_secretsmanager_secret" "access_key" {
@@ -39,7 +38,7 @@ resource "aws_secretsmanager_secret" "secret_key" {
 
 resource "aws_secretsmanager_secret_version" "secret_key" {
   secret_id     = aws_secretsmanager_secret.secret_key.id
-  secret_string = aws_iam_access_key.terraform.encrypted_secret
+  secret_string = aws_iam_access_key.terraform.secret
 }
 
 resource "aws_secretsmanager_secret_version" "access_key" {
