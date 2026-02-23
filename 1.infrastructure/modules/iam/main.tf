@@ -28,7 +28,7 @@ resource "aws_iam_access_key" "terraform" {
 }
 
 resource "aws_secretsmanager_secret" "secret_key" {
-  name = "${aws_iam_user.terraform.name}_secret"
+  name = "${aws_iam_user.terraform.name}_secret_2"
 }
 
 resource "aws_secretsmanager_secret_version" "secret_key" {
