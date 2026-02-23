@@ -1,26 +1,42 @@
-data "aws_ssoadmin_instances" "sso_instance" {}
+data "aws_ssoadmin_instances" "instance" {}
 
-data "aws_iam_policy_document" "allow_terraform_user_to_assume_role_policy" {
+data "aws_s3_bucket" "state_bucket" {
+  bucket = var.state_bucket_name
+  region = var.region
+}
+
+data "aws_iam_policy_document" "terraform_state_object_management" {
   statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      identifiers = [aws_iam_user.terraform_user.arn]
-      type        = "AWS"
-    }
+    sid = "Allow bucket List from this account"
+
+    actions = [
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:DeleteObject"
+    ]
+
+    resources = [
+      data.aws_s3_bucket.state_bucket.arn
+    ]
   }
 }
 
-data "aws_iam_policy" "aws_managed_s3_full_access" {
-  arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-}
+data "aws_iam_policy_document" "cross_account_assume_role" {
+  statement {
+    sid = "Allow cross account assume role"
 
-data "aws_identitystore_group" "admin_group" {
-  identity_store_id = data.aws_ssoadmin_instances.sso_instance.identity_store_ids[0]
-  alternate_identifier {
-    unique_attribute {
-      attribute_path  = ""
-      attribute_value = ""
+    actions = [
+      "sts:AssumeRole"
+    ]
+
+    effect = "Allow"
+
+    principals {
+      identifiers = [aws_iam_user.terraform.arn, var.created_account_arn]
+      type        = "AWS"
     }
+
+
   }
 }

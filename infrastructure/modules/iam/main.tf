@@ -1,21 +1,37 @@
-resource "aws_iam_user" "terraform_user" {
-  name          = "terraform_user"
-  path          = "/system/"
-  force_destroy = true
+resource "aws_iam_user" "terraform" {
+  name = "terraform_user_${var.environment}"
+  path = "/system/"
   tags = {
-    "providedBy" = var.infrastructure_provider
+    providedBy = "terraform"
   }
-
 }
 
-resource "aws_iam_role" "terraform_assume_role_role" {
-  name               = "terraform_assume_role_role"
-  assume_role_policy = data.aws_iam_policy_document.allow_terraform_user_to_assume_role_policy.json
+resource "aws_iam_role" "allow_assume_role" {
+  assume_role_policy = aws_iam_policy.assume_role.arn
+  path               = "/system/"
 }
 
-resource "aws_iam_role_policy" "assign_assume_role_policy_to" {
-  name   = "terraform_user_s3_full_access"
-  role   = aws_iam_role.terraform_assume_role_role.name
-  policy = data.aws_iam_policy.aws_managed_s3_full_access.policy
+resource "aws_iam_policy" "terraform_state_object_management" {
+  policy = data.aws_iam_policy_document.terraform_state_object_management.json
+  name   = "terraform_state_object_management"
+  path   = "/system/"
+}
 
+resource "aws_iam_access_key" "terraform" {
+  user    = aws_iam_user.terraform.arn
+  pgp_key = "keybase:Anderson"
+}
+
+resource "aws_iam_policy" "assume_role" {
+  policy = data.aws_iam_policy_document.cross_account_assume_role.json
+  name   = "cross_account_assume_role"
+  path   = "/system/"
+}
+
+resource "aws_secretsmanager_secret" "key" {
+  name = "${aws_iam_user.terraform.name}_secret_key"
+}
+resource "aws_secretsmanager_secret_version" "key" {
+  secret_id     = aws_secretsmanager_secret.key.id
+  secret_string = aws_iam_access_key.terraform.secret
 }

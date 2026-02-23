@@ -21,6 +21,11 @@ module "accounts" {
   sso_admin_permission_set_arn = var.sso_admin_permission_set_arn
 }
 
-# module "iam" {
-#   source = "./modules/iam"
-# }
+module "iam" {
+  source                  = "./modules/iam"
+  infrastructure_provider = local.provider
+  state_bucket_name       = local.state_bucket_name
+  environment             = var.current_environment
+  region                  = local.default_region
+  created_account_arn      = module.accounts.created_account_arn
+}
