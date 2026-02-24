@@ -15,7 +15,7 @@ data "aws_iam_policy_document" "management_account_assume_role" {
 }
 
 
-data "aws_iam_policy_document" "terraform_management" {
+data "aws_iam_policy_document" "iam_management" {
   statement {
     sid    = "Statement1"
     effect = "Allow"

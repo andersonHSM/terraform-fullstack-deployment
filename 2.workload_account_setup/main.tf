@@ -1,6 +1,6 @@
 
 resource "aws_iam_policy" "terraform_management" {
-  policy = data.aws_iam_policy_document.terraform_management.json
+  policy = data.aws_iam_policy_document.iam_management.json
   name   = "terraform_management_${var.environment}"
 }
 
