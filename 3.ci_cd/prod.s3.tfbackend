@@ -4,4 +4,4 @@ key    = "prod/code_build/terraform.tfstate"
 assume_role = {
   role_arn = "arn:aws:iam::566946614098:role/system/terraform_assume_role_prod"
 }
-profile = "anderson_admin_prod"
+profile = "terraform_user_qa"
