@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+
 provider "aws" {
   profile = lookup(var.profile, var.environment, "")
 }
