@@ -21,5 +21,5 @@ resource "aws_iam_role" "code_pipeline" {
 }
 
 data "aws_iam_policy_document" "code_pipeline_policy" {
-  
+
 }
