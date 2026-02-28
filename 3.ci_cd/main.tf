@@ -1,9 +1,11 @@
 
 module "code_build" {
-  source              = "./modules/code_build"
-  environment         = var.environment
-  backend_repository  = var.backend_repository
-  frontend_repository = var.frontend_repository
+  source                        = "./modules/code_build"
+  environment                   = var.environment
+  backend_repository            = var.backend_repository
+  frontend_repository           = var.frontend_repository
+  repo_code_star_connection_arn = module.code_pipeline.repo_code_star_connection_arn
+  output_artifact_bucket_name   = module.code_pipeline.output_artifact_bucket_name
 }
 
 module "code_pipeline" {

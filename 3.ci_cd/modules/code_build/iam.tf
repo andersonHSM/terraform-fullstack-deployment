@@ -47,15 +47,15 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
     actions   = ["ec2:CreateNetworkInterfacePermission"]
     resources = ["arn:aws:ec2:us-east-1:123456789012:network-interface/*"]
 
-    condition {
-      test     = "StringEquals"
-      variable = "ec2:Subnet"
-
-      values = [
-        aws_subnet.example1.arn,
-        aws_subnet.example2.arn,
-      ]
-    }
+    # condition {
+    #   test     = "StringEquals"
+    #   variable = "ec2:Subnet"
+    #
+    #   values = [
+    #     aws_subnet.example1.arn,
+    #     aws_subnet.example2.arn,
+    #   ]
+    # }
 
     condition {
       test     = "StringEquals"
@@ -64,14 +64,14 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
     }
   }
 
-  statement {
-    effect  = "Allow"
-    actions = ["s3:*"]
-    resources = [
-      aws_s3_bucket.example.arn,
-      "${aws_s3_bucket.example.arn}/*",
-    ]
-  }
+  # statement {
+  #   effect  = "Allow"
+  #   actions = ["s3:*"]
+  #   resources = [
+  #     aws_s3_bucket.example.arn,
+  #     "${aws_s3_bucket.example.arn}/*",
+  #   ]
+  # }
 
   statement {
     effect = "Allow"
@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
 
 
 resource "aws_iam_role" "code_build" {
-  assume_role_policy = data.aws_iam_policy_document.code_build_assume_role
+  assume_role_policy = data.aws_iam_policy_document.code_build_assume_role.json
   name               = "code_build_role_${var.environment}"
   path               = "/ci/"
 }

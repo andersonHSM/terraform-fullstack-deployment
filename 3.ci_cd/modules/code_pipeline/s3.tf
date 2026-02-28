@@ -1,6 +1,7 @@
 resource "aws_s3_bucket" "code_pipeline" {
-  bucket_prefix = "code_pipeline"
+  bucket        = "code_pipeline"
   region        = var.region
+  force_destroy = true
 }
 resource "aws_s3_bucket_versioning" "code_pipeline" {
   bucket = aws_s3_bucket.code_pipeline.arn
