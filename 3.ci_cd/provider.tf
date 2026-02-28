@@ -14,16 +14,3 @@ provider "aws" {
   profile = lookup(var.profile, var.environment, "")
   alias   = "management"
 }
-
-
-provider "aws" {
-  region  = var.region
-  alias   = "qa"
-  profile = lookup(var.profile, "qa", "")
-}
-
-provider "aws" {
-  region  = var.region
-  alias   = "prod"
-  profile = lookup(var.profile, "prod", "")
-}
