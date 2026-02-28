@@ -64,14 +64,14 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
     }
   }
 
-  # statement {
-  #   effect  = "Allow"
-  #   actions = ["s3:*"]
-  #   resources = [
-  #     aws_s3_bucket.example.arn,
-  #     "${aws_s3_bucket.example.arn}/*",
-  #   ]
-  # }
+  statement {
+    effect  = "Allow"
+    actions = ["s3:*"]
+    resources = [
+      var.artifacts_bucket_arn,
+      "${var.artifacts_bucket_arn}/*",
+    ]
+  }
 
   statement {
     effect = "Allow"
@@ -79,7 +79,7 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
       "codeconnections:GetConnectionToken",
       "codeconnections:GetConnection"
     ]
-    resources = ["arn:aws:codestar-connections:us-east-1:123456789012:connection/guid-string"]
+    resources = [var.repo_code_star_connection_arn]
   }
 }
 
@@ -93,4 +93,5 @@ resource "aws_iam_role" "code_build" {
 resource "aws_iam_role_policy" "code_build_permissions" {
   policy = data.aws_iam_policy_document.code_build_role_permissions.json
   role   = aws_iam_role.code_build.name
+  name   = "code_build_permissions"
 }
