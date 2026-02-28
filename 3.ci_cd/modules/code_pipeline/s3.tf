@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "code_pipeline" {
-  bucket        = "code_pipeline"
+  bucket        = "psibag_code_artifactories"
   region        = var.region
   force_destroy = true
 }

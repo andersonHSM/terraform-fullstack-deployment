@@ -86,6 +86,6 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
 
 resource "aws_iam_role" "code_build" {
   assume_role_policy = data.aws_iam_policy_document.code_build_assume_role.json
-  name               = "code_build_role_${var.environment}"
+  name               = "code_build_role"
   path               = "/ci/"
 }
