@@ -21,7 +21,8 @@ resource "aws_codebuild_project" "frontend" {
       type     = "CODECONNECTIONS"
     }
 
-    type = "GITHUB"
+    location = var.frontend_repository_url
+    type     = "GITHUB"
   }
 
   concurrent_build_limit = 2

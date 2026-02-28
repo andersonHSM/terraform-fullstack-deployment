@@ -6,6 +6,7 @@ module "code_build" {
   frontend_repository           = var.frontend_repository
   repo_code_star_connection_arn = module.code_pipeline.repo_code_star_connection_arn
   output_artifact_bucket_name   = module.code_pipeline.output_artifact_bucket_name
+  frontend_repository_url       = var.frontend_repository_url
 }
 
 module "code_pipeline" {

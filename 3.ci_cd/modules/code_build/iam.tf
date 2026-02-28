@@ -81,6 +81,17 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
     ]
     resources = ["arn:aws:codestar-connections:us-east-1:123456789012:connection/guid-string"]
   }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "codeconnections:UseConnection",
+      "codeconnections:GetConnectionToken"
+    ]
+    resources = [
+      var.repo_code_star_connection_arn
+    ]
+  }
 }
 
 
@@ -88,4 +99,9 @@ resource "aws_iam_role" "code_build" {
   assume_role_policy = data.aws_iam_policy_document.code_build_assume_role.json
   name               = "code_build_role"
   path               = "/ci/"
+}
+
+resource "aws_iam_role_policy" "code_build_permissions" {
+  policy = data.aws_iam_policy_document.code_build_role_permissions.json
+  role   = aws_iam_role.code_build.name
 }

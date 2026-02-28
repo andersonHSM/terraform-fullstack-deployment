@@ -27,6 +27,7 @@ variable "profile" {
 }
 
 variable "frontend_repository" {}
+variable "frontend_repository_url" {}
 variable "backend_repository" {}
 
 variable "project_name" {}
