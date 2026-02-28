@@ -81,17 +81,6 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
     ]
     resources = ["arn:aws:codestar-connections:us-east-1:123456789012:connection/guid-string"]
   }
-
-  statement {
-    effect = "Allow"
-    actions = [
-      "codeconnections:UseConnection",
-      "codeconnections:GetConnectionToken"
-    ]
-    resources = [
-      var.repo_code_star_connection_arn
-    ]
-  }
 }
 
 

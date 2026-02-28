@@ -1,3 +1,8 @@
+module "iam" {
+  source                = "./modules/iam"
+  region                = var.region
+  management_account_id = var.management_account_id
+}
 
 module "code_build" {
   source                        = "./modules/code_build"

@@ -32,3 +32,4 @@ variable "backend_repository" {}
 
 variable "project_name" {}
 variable "region" {}
+variable "management_account_id" {}
