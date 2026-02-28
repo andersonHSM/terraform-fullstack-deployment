@@ -1,5 +1,5 @@
 output "repo_code_star_connection_arn" {
-  value = aws_codestarconnections_connection.frontend.arn
+  value = aws_codestarconnections_connection.project.arn
 }
 
 output "artifacts_bucket_name" {

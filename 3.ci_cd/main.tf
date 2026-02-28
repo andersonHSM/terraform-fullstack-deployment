@@ -17,7 +17,5 @@ module "code_pipeline" {
   project_name                = var.project_name
   region                      = var.region
   environment                 = var.environment
-  code_star_connection_arn    = ""
   frontend_build_project_name = module.code_build.frontend_build_project_name
-
 }

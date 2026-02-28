@@ -1,4 +1,4 @@
-resource "aws_codestarconnections_connection" "frontend" {
+resource "aws_codestarconnections_connection" "project" {
   name          = var.project_name
   provider_type = "GitHub"
   region        = var.region
@@ -28,12 +28,12 @@ resource "aws_codepipeline" "frontend" {
       provider = "CodeStarSourceConnection"
       version  = "1"
       output_artifacts = [
-        local.source_output_artifact
+        local.frontend_source_output_artifact
       ]
 
       configuration = {
         BranchName       = "main"
-        ConnectionArn    = var.code_star_connection_arn
+        ConnectionArn    = aws_codestarconnections_connection.project.arn
         FullRepositoryId = "${var.project_name}/${var.frontend_repository}"
       }
     }
@@ -49,12 +49,17 @@ resource "aws_codepipeline" "frontend" {
       provider = "CodeBuild"
       version  = "1"
 
-      output_artifacts = [local.build_output_artifact]
-      input_artifacts  = [local.source_output_artifact]
+      output_artifacts = [
+        local.frontend_build_output_artifact
+      ]
+      input_artifacts = [
+        local.frontend_source_output_artifact
+      ]
+
       configuration = {
-        ProjectName = "${var.project_name}-frontend"
+        ProjectName   = var.frontend_build_project_name
+        PrimarySource = local.frontend_source_output_artifact
       }
     }
   }
-
 }
