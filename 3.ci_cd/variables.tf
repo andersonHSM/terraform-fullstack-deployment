@@ -1,5 +1,5 @@
 variable "valid_environments" {
-  default = ["tools", "qa", "prod"]
+  default = ["management", "qa", "prod"]
 }
 
 variable "workload_account_terraform_role_to_assume" {
@@ -20,9 +20,9 @@ variable "profile" {
   type     = map(string)
   nullable = false
   default = {
-    qa    = "qa_profile"
-    prod  = "prod_profile"
-    tools = "tools_profile"
+    qa         = "qa_profile"
+    prod       = "prod_profile"
+    management = "management_profile"
   }
 }
 
@@ -33,3 +33,4 @@ variable "backend_repository" {}
 variable "project_name" {}
 variable "region" {}
 variable "management_account_id" {}
+

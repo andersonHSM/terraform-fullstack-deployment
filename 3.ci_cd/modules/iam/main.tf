@@ -4,7 +4,7 @@ resource "aws_iam_policy" "code_start_connection_admin_access" {
 }
 
 resource "aws_ssoadmin_customer_managed_policy_attachment" "code_start_connection_admin_access" {
-  instance_arn       = data.aws_ssoadmin_instances.sso.identity_store_ids[0]
+  instance_arn       = data.aws_ssoadmin_instances.sso.arns[0]
   permission_set_arn = data.aws_ssoadmin_permission_set.admin.arn
   customer_managed_policy_reference {
     name = aws_iam_policy.code_start_connection_admin_access.name
