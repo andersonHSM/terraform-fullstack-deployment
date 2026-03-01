@@ -72,6 +72,19 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
       "${var.artifacts_bucket_arn}/*",
     ]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:CreateRepository",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:GetAuthorizationToken",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart"
+    ]
+    resources = ["*"]
+  }
 
   statement {
     effect = "Allow"
