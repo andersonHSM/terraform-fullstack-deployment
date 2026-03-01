@@ -21,7 +21,9 @@ resource "aws_codebuild_project" "frontend" {
     artifact_identifier = "${var.frontend_repository}_build"
     name                = local.frontend_project_name
     location            = var.artifacts_bucket_name
+    encryption_disabled = true
   }
+
 
 
   source {
@@ -39,6 +41,11 @@ resource "aws_codebuild_project" "frontend" {
 
     location = var.frontend_repository_url
     type     = "GITHUB"
+  }
+
+  cache {
+    type     = "S3"
+    location = var.artifacts_bucket_name
   }
 
   concurrent_build_limit = 2
