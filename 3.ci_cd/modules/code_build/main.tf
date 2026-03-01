@@ -8,6 +8,11 @@ resource "aws_codebuild_project" "frontend" {
     image                       = "aws/codebuild/standard:7.0"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
+
+    environment_variable {
+      name  = "SHELL"
+      value = "bash"
+    }
   }
 
   artifacts {
@@ -17,6 +22,7 @@ resource "aws_codebuild_project" "frontend" {
     name                = local.frontend_project_name
     location            = var.artifacts_bucket_name
   }
+
 
   source {
     git_clone_depth = 1
