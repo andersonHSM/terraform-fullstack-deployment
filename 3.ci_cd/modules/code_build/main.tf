@@ -16,13 +16,13 @@ resource "aws_codebuild_project" "frontend" {
   }
 
   artifacts {
-    type                = "S3"
-    bucket_owner_access = "FULL"
-    artifact_identifier = "${var.frontend_repository}_build"
-    name                = "${var.frontend_repository}/output"
-    location            = var.artifacts_bucket_name
-    encryption_disabled = true
-    namespace_type      = "BUILD_ID"
+    type                   = "S3"
+    bucket_owner_access    = "FULL"
+    location               = var.artifacts_bucket_name
+    encryption_disabled    = true
+    namespace_type         = "BUILD_ID"
+    packaging              = "ZIP"
+    override_artifact_name = true
   }
 
 
