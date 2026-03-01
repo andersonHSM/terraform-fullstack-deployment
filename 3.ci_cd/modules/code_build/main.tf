@@ -43,11 +43,6 @@ resource "aws_codebuild_project" "frontend" {
     type     = "GITHUB"
   }
 
-  cache {
-    type     = "S3"
-    location = var.artifacts_bucket_name
-  }
-
   concurrent_build_limit = 2
 }
 
