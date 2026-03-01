@@ -35,7 +35,6 @@ resource "aws_codebuild_project" "frontend" {
       fetch_submodules = true
     }
 
-    buildspec = ".config/buildspec.yml"
     auth {
       resource = var.repo_code_star_connection_arn
       type     = "CODECONNECTIONS"
