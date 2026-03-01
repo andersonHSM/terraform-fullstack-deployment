@@ -20,6 +20,7 @@ resource "aws_codebuild_project" "frontend" {
     bucket_owner_access    = "FULL"
     location               = var.artifacts_bucket_name
     encryption_disabled    = true
+    name                   = var.frontend_repository
     namespace_type         = "BUILD_ID"
     packaging              = "ZIP"
     override_artifact_name = true

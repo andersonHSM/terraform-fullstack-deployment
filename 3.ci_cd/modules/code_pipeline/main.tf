@@ -42,6 +42,7 @@ resource "aws_codepipeline" "frontend" {
   stage {
     name = "Build"
 
+
     action {
       category = "Build"
       name     = "BuildonCodeBuild"
