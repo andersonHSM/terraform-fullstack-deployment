@@ -19,9 +19,10 @@ resource "aws_codebuild_project" "frontend" {
     type                = "S3"
     bucket_owner_access = "FULL"
     artifact_identifier = "${var.frontend_repository}_build"
-    name                = local.frontend_project_name
+    name                = "${var.frontend_repository}/output"
     location            = var.artifacts_bucket_name
     encryption_disabled = true
+    namespace_type      = "BUILD_ID"
   }
 
 
