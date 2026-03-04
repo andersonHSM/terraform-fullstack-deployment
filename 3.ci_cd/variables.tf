@@ -34,3 +34,13 @@ variable "project_name" {}
 variable "region" {}
 variable "management_account_id" {}
 
+variable "backend_config" {
+  type = map(string)
+  default = {
+    bucket   = "curso-deploy-fullstack-state-2026"
+    key      = "qa/ci_cd/terraform.tfstate"
+    role_arn = "arn:aws:iam::566946614098:role/system/terraform_assume_role_qa"
+    profile  = "terraform_user_qa"
+    region   = "us-east-1"
+  }
+}
