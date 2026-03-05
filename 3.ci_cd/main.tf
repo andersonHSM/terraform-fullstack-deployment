@@ -10,6 +10,11 @@ module "frontend_build" {
   aws_region                    = var.aws_region
 }
 
+moved {
+  from = module.code_build
+  to   = module.frontend_build
+}
+
 module "code_pipeline" {
   source                      = "./modules/code_pipeline"
   backend_repository          = var.backend_repository
@@ -20,7 +25,7 @@ module "code_pipeline" {
   frontend_build_project_name = module.frontend_build.frontend_build_project_name
 }
 
-module "ecr" {
-  source       = "./modules/ecr"
-  project_name = var.project_name
-}
+# module "ecr" {
+#   source       = "./modules/ecr"
+#   project_name = var.project_name
+# }
