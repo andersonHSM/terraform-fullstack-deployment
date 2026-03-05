@@ -1,13 +1,14 @@
-module "code_build" {
+module "frontend_build" {
   source                        = "./modules/code_build"
   environment                   = var.environment
-  backend_repository            = var.backend_repository
-  frontend_repository           = var.frontend_repository
+  repository_name               = var.frontend_repository
   repo_code_star_connection_arn = module.code_pipeline.repo_code_star_connection_arn
   artifacts_bucket_name         = module.code_pipeline.artifacts_bucket_name
   artifacts_bucket_arn          = module.code_pipeline.artifacts_bucket_arn
-  frontend_repository_url       = var.frontend_repository_url
+  repository_url                = var.frontend_repository_url
 
+  aws_account_id = var.aws_account_id
+  aws_region     = var.aws_region
 }
 
 module "code_pipeline" {
@@ -15,7 +16,12 @@ module "code_pipeline" {
   backend_repository          = var.backend_repository
   frontend_repository         = var.frontend_repository
   project_name                = var.project_name
-  region                      = var.region
+  region                      = var.aws_region
   environment                 = var.environment
-  frontend_build_project_name = module.code_build.frontend_build_project_name
+  frontend_build_project_name = module.frontend_build.frontend_build_project_name
+}
+
+module "ecr" {
+  source       = "./modules/ecr"
+  project_name = var.project_name
 }

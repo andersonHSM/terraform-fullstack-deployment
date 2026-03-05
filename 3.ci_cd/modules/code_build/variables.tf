@@ -1,8 +1,9 @@
 
 variable "environment" {}
-variable "frontend_repository" {}
-variable "backend_repository" {}
+variable "repository_name" {}
+variable "repository_url" {}
 variable "repo_code_star_connection_arn" {}
 variable "artifacts_bucket_name" {}
 variable "artifacts_bucket_arn" {}
-variable "frontend_repository_url" {}
+variable "aws_account_id" {}
+variable "aws_region" {}

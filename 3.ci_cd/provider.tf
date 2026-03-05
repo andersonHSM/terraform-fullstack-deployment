@@ -8,6 +8,6 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.region
+  region  = var.aws_region
   profile = lookup(var.profile, var.environment)
 }

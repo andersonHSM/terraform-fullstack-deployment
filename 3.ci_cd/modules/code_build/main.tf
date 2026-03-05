@@ -20,7 +20,7 @@ resource "aws_codebuild_project" "frontend" {
     bucket_owner_access    = "FULL"
     location               = var.artifacts_bucket_name
     encryption_disabled    = true
-    name                   = var.frontend_repository
+    name                   = var.repository_name
     namespace_type         = "BUILD_ID"
     packaging              = "ZIP"
     override_artifact_name = true
@@ -40,7 +40,7 @@ resource "aws_codebuild_project" "frontend" {
       type     = "CODECONNECTIONS"
     }
 
-    location = var.frontend_repository_url
+    location = var.repository_url
     type     = "GITHUB"
   }
 

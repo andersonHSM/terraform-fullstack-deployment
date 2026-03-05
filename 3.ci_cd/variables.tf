@@ -31,7 +31,7 @@ variable "frontend_repository_url" {}
 variable "backend_repository" {}
 
 variable "project_name" {}
-variable "region" {}
+variable "aws_region" {}
 variable "management_account_id" {}
 
 variable "backend_config" {
@@ -44,3 +44,10 @@ variable "backend_config" {
     region   = "us-east-1"
   }
 }
+
+variable "aws_account_id" {
+  default = ""
+  type    = string
+}
+
+variable "" {}
