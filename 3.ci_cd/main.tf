@@ -25,7 +25,7 @@ module "code_pipeline" {
   frontend_build_project_name = module.frontend_build.frontend_build_project_name
 }
 
-# module "ecr" {
-#   source       = "./modules/ecr"
-#   project_name = var.project_name
-# }
+module "ecr" {
+  source       = "./modules/ecr"
+  project_name = var.project_name
+}
