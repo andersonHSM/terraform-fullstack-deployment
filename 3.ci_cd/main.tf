@@ -6,9 +6,8 @@ module "frontend_build" {
   artifacts_bucket_name         = module.code_pipeline.artifacts_bucket_name
   artifacts_bucket_arn          = module.code_pipeline.artifacts_bucket_arn
   repository_url                = var.frontend_repository_url
-
-  aws_account_id = var.aws_account_id
-  aws_region     = var.aws_region
+  aws_account_id                = var.aws_account_id
+  aws_region                    = var.aws_region
 }
 
 module "code_pipeline" {
