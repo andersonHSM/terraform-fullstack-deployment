@@ -89,6 +89,7 @@ data "aws_iam_policy_document" "code_build_role_permissions" {
   statement {
     effect = "Allow"
     actions = [
+      "codeconnections:UseConnection",
       "codeconnections:GetConnectionToken",
       "codeconnections:GetConnection"
     ]

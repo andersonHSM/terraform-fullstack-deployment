@@ -52,6 +52,7 @@ resource "aws_codebuild_project" "project" {
       fetch_submodules = true
     }
     report_build_status = true
+
     auth {
       resource = var.repo_code_star_connection_arn
       type     = "CODECONNECTIONS"
