@@ -15,12 +15,12 @@ data "aws_ecr_lifecycle_policy_document" "policies" {
 
   rule {
     priority    = 2
-    description = "Store 10 no production versioned images"
+    description = "Store 10 non production versioned images"
     selection {
       count_number    = 10
       count_type      = "imageCountMoreThan"
       tag_status      = "tagged"
-      tag_prefix_list = ["v*-alpha*", "v*-beta*"]
+      tag_pattern_list = ["*alpha*", "*beta*"]
     }
     action {
       type = "expire"
