@@ -25,7 +25,7 @@ resource "aws_codebuild_project" "project" {
 
     environment_variable {
       name  = "IMAGE_REPO_NAME"
-      value = "${var.ecr_repository_name}_${var.repository_name}"
+      value = "${var.ecr_repository_name}"
     }
 
     environment_variable {
