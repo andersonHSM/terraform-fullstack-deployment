@@ -9,7 +9,7 @@ module "frontend_build" {
   aws_account_id                = var.aws_account_id
   aws_region                    = var.aws_region
   encryption_key_arn            = module.frontend_pipeline.encryption_key_arn
-  ecr_repository_name           = module.ecr.ecr_repository_name
+  ecr_repository_name           = module.ecr_frontend.ecr_repository_name
 }
 
 moved {
@@ -29,7 +29,13 @@ moved {
   from = module.code_pipeline
   to   = module.frontend_pipeline
 }
-module "ecr" {
-  source       = "./modules/ecr"
-  project_name = var.project_name
+module "ecr_frontend" {
+  source        = "./modules/ecr"
+  project_name  = var.project_name
+  project_scope = "frontend"
+}
+
+moved {
+  from = module.ecr
+  to   = module.ecr_frontend
 }

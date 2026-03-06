@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "project" {
-  name = var.project_name
+  name = "${var.project_name}/${var.project_scope}"
 }
 
 

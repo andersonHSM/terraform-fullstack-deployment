@@ -1,9 +1,9 @@
 
 resource "aws_codebuild_project" "project" {
-  name           = var.repository_name
-  service_role   = aws_iam_role.code_build.arn
-  badge_enabled  = true
-  encryption_key = var.encryption_key_arn
+  name             = var.repository_name
+  service_role     = aws_iam_role.code_build.arn
+  badge_enabled    = true
+  encryption_key   = var.encryption_key_arn
   auto_retry_limit = 3
 
 
@@ -12,7 +12,7 @@ resource "aws_codebuild_project" "project" {
     image                       = "aws/codebuild/standard:7.0"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
-
+    privileged_mode             = true
     environment_variable {
       name  = "SHELL"
       value = "bash"
