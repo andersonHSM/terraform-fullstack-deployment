@@ -14,7 +14,7 @@ data "aws_ecr_lifecycle_policy_document" "policies" {
   }
 
   rule {
-    priority    = 1
+    priority    = 2
     description = "Store 10 no production versioned images"
     selection {
       count_number    = 10
