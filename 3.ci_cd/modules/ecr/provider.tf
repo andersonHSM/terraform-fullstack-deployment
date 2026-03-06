@@ -6,11 +6,3 @@ terraform {
     }
   }
 }
-
-
-
-provider "aws" {
-  region  = var.region
-  profile = lookup(var.profile, var.environment, "")
-  alias   = "management"
-}
