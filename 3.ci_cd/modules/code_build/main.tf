@@ -27,6 +27,16 @@ resource "aws_codebuild_project" "project" {
       name  = "IMAGE_REPO_NAME"
       value = "${var.ecr_repository_name}_${var.repository_name}"
     }
+
+    environment_variable {
+      name  = "AWS_DEFAULT_REGION"
+      value = var.aws_region
+    }
+
+    environment_variable {
+      name  = "AWS_ACCOUNT_ID"
+      value = data.aws_caller_identity.current.account_id
+    }
   }
 
   artifacts {
