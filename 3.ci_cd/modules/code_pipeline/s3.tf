@@ -1,11 +1,11 @@
 resource "aws_s3_bucket" "code_pipeline" {
   bucket        = "psibag-code-artifacts"
-  region        = var.region
+  region        = var.aws_region
   force_destroy = true
 }
 resource "aws_s3_bucket_versioning" "code_pipeline" {
   bucket = aws_s3_bucket.code_pipeline.bucket
-  region = var.region
+  region = var.aws_region
   versioning_configuration {
     status = "Enabled"
   }
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "code_pipeline" {
     id     = "MonthlyPipelinedArtifactsExpriation"
     status = "Enabled"
     filter {
-      prefix = "/${aws_codepipeline.frontend.name}"
+      prefix = "/${aws_codepipeline.project.name}"
     }
     expiration {
       days = 30

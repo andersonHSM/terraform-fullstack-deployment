@@ -4,6 +4,7 @@ resource "aws_codebuild_project" "project" {
   service_role   = aws_iam_role.code_build.arn
   badge_enabled  = true
   encryption_key = var.encryption_key_arn
+  auto_retry_limit = 3
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"

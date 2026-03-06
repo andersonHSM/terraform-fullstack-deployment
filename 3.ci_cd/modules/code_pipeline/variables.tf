@@ -1,11 +1,6 @@
 
-variable "environment" {}
-variable "frontend_repository" {}
-variable "backend_repository" {}
+variable "repository_name" {}
 
 variable "project_name" {}
-variable "region" {}
-
-
-
-variable "frontend_build_project_name" {}
+variable "aws_region" {}
+variable "codebuild_project_name" {}
