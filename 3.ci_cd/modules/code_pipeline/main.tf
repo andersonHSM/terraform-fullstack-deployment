@@ -10,7 +10,7 @@ moved {
 }
 
 resource "aws_codepipeline" "project" {
-  name     = "${var.project_name}-frontend-pipeline"
+  name     = "${var.project_name}-${var.repository_name}-pipeline"
   role_arn = aws_iam_role.code_pipeline.arn
 
   artifact_store {
@@ -33,7 +33,7 @@ resource "aws_codepipeline" "project" {
       provider = "CodeStarSourceConnection"
       version  = "1"
       output_artifacts = [
-        local.frontend_source_output_artifact
+        local.source_output_artifact
       ]
 
       configuration = {
@@ -55,15 +55,15 @@ resource "aws_codepipeline" "project" {
       version  = "1"
 
       output_artifacts = [
-        local.frontend_build_output_artifact
+        local.build_output_artifact
       ]
       input_artifacts = [
-        local.frontend_source_output_artifact
+        local.source_output_artifact
       ]
 
       configuration = {
         ProjectName   = var.codebuild_project_name
-        PrimarySource = local.frontend_source_output_artifact
+        PrimarySource = local.source_output_artifact
       }
     }
   }

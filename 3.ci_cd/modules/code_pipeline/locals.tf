@@ -1,5 +1,5 @@
 locals {
   ci_cd_path             = "/ci-cd/"
-  frontend_source_output_artifact = "${var.project_name}frontend-source-output-artifact"
-  frontend_build_output_artifact  = "${var.project_name}frontend-build-output-artifact"
+  source_output_artifact = "${var.project_name}-${var.repository_name}-source-output-artifact"
+  build_output_artifact  = "${var.project_name}-${var.repository_name}-build-output-artifact"
 }

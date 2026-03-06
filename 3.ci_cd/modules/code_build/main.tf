@@ -6,12 +6,12 @@ resource "aws_codebuild_project" "project" {
   encryption_key = var.encryption_key_arn
   auto_retry_limit = 3
 
+
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "docker:dind"
+    image                       = "aws/codebuild/standard:7.0"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
-    privileged_mode             = false
 
     environment_variable {
       name  = "SHELL"
