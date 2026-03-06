@@ -14,6 +14,6 @@ resource "aws_ecr_account_setting" "blob_mounting" {
 }
 
 resource "aws_ecr_lifecycle_policy" "expiration" {
-  policy     = data.aws_ecr_lifecycle_policy_document.policies
-  repository = aws_ecr_repository.project
+  policy     = data.aws_ecr_lifecycle_policy_document.policies.json
+  repository = aws_ecr_repository.project.name
 }

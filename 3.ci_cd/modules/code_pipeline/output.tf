@@ -8,3 +8,7 @@ output "artifacts_bucket_name" {
 output "artifacts_bucket_arn" {
   value = aws_s3_bucket.code_pipeline.arn
 }
+
+output "encryption_key_arn" {
+  value = data.aws_kms_alias.s3_kms_key.arn
+}

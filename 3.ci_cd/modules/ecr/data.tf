@@ -1,6 +1,6 @@
 data "aws_ecr_lifecycle_policy_document" "policies" {
   rule {
-    priority    = 0
+    priority    = 1
     description = "Expire untagged images older than 7 days"
     selection {
       count_unit   = "days"
@@ -17,8 +17,8 @@ data "aws_ecr_lifecycle_policy_document" "policies" {
     priority    = 1
     description = "Store 10 no production versioned images"
     selection {
-      count_number    = 0
-      count_type      = ""
+      count_number    = 10
+      count_type      = "imageCountMoreThan"
       tag_status      = "tagged"
       tag_prefix_list = ["v*-alpha*", "v*-beta*"]
     }

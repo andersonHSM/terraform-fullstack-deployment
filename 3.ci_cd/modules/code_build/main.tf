@@ -1,17 +1,30 @@
+
 resource "aws_codebuild_project" "project" {
-  name          = local.frontend_project_name
-  service_role  = aws_iam_role.code_build.arn
-  badge_enabled = true
+  name           = var.repository_name
+  service_role   = aws_iam_role.code_build.arn
+  badge_enabled  = true
+  encryption_key = var.encryption_key_arn
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:7.0"
+    image                       = "docker:dind"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
+    privileged_mode             = false
 
     environment_variable {
       name  = "SHELL"
       value = "bash"
+    }
+
+    environment_variable {
+      name  = "project"
+      value = var.repository_name
+    }
+
+    environment_variable {
+      name  = "IMAGE_REPO_NAME"
+      value = "${var.ecr_repository_name}_${var.repository_name}"
     }
   }
 
@@ -44,17 +57,3 @@ moved {
   from = aws_codebuild_project.frontend
   to   = aws_codebuild_project.project
 }
-
-# resource "aws_codebuild_project" "backend" {
-#   name         = "backend_builder_${var.environment}"
-#   service_role = aws_iam_role.code_build.arn
-#   source {
-#     type = "GITHUB"
-#   }
-#   environment {
-#     compute_type = ""
-#     image        = ""
-#     type         = ""
-#   }
-#
-# }
