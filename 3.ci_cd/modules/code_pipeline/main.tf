@@ -36,10 +36,12 @@ resource "aws_codepipeline" "project" {
         local.source_output_artifact
       ]
 
+
       configuration = {
-        BranchName       = "main"
-        ConnectionArn    = aws_codestarconnections_connection.project.arn
-        FullRepositoryId = "${var.project_name}/${var.repository_name}"
+        BranchName           = "main"
+        ConnectionArn        = aws_codestarconnections_connection.project.arn
+        FullRepositoryId     = "${var.project_name}/${var.repository_name}"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
       }
     }
   }

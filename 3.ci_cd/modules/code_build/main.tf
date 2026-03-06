@@ -46,12 +46,12 @@ resource "aws_codebuild_project" "project" {
 
 
   source {
-    git_clone_depth = 1
+    git_clone_depth = 0
 
     git_submodules_config {
       fetch_submodules = true
     }
-
+    report_build_status = true
     auth {
       resource = var.repo_code_star_connection_arn
       type     = "CODECONNECTIONS"
