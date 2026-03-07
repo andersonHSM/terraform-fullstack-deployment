@@ -24,7 +24,7 @@ resource "aws_codepipeline" "project" {
   }
 
   stage {
-    name = "SourceFromGithub"
+    name = "SourceMainBranch"
 
     action {
       category = "Source"
@@ -42,6 +42,31 @@ resource "aws_codepipeline" "project" {
         ConnectionArn        = aws_codestarconnections_connection.project.arn
         FullRepositoryId     = "${var.project_name}/${var.repository_name}"
         OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
+      }
+    }
+  }
+
+  stage {
+    name = "SourceDevelopBranch"
+
+    action {
+      category = "Source"
+      name     = "Source"
+      owner    = "AWS"
+      provider = "CodeStarSourceConnection"
+      version  = "1"
+      output_artifacts = [
+        local.source_output_artifact
+      ]
+
+
+      configuration = {
+        BranchName           = "develop"
+        ConnectionArn        = aws_codestarconnections_connection.project.arn
+        FullRepositoryId     = "${var.project_name}/${var.repository_name}"
+        OutputArtifactFormat = "CODEBUILD_CLONE_REF"
+        DetectChanges        = false
       }
     }
   }
