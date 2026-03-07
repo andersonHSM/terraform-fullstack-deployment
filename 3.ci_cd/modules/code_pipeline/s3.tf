@@ -26,7 +26,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "code_pipeline" {
     id     = "MonthlyPipelinedArtifactsExpriation"
     status = "Enabled"
     filter {
-      prefix = "/${aws_codepipeline.project.name}"
+      prefix = "/${aws_codepipeline.main_pipeline.name}"
     }
     expiration {
       days = 30
