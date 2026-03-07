@@ -13,6 +13,7 @@ resource "aws_codebuild_project" "project" {
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
     privileged_mode             = true
+
     environment_variable {
       name  = "SHELL"
       value = "bash"
@@ -51,6 +52,7 @@ resource "aws_codebuild_project" "project" {
     git_submodules_config {
       fetch_submodules = true
     }
+
     report_build_status = true
 
     auth {
@@ -63,6 +65,12 @@ resource "aws_codebuild_project" "project" {
   }
 
   concurrent_build_limit = 2
+
+  cache {
+    type  = "LOCAL"
+    modes = ["LOCAL_DOCKER_LAYER_CACHE", "LOCAL_SOURCE_CACHE"]
+  }
+
 }
 
 moved {
