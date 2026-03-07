@@ -24,7 +24,7 @@ resource "aws_codepipeline" "project" {
   }
 
   stage {
-    name = "SourcefromGithub"
+    name = "SourceFromGithub"
 
     action {
       category = "Source"
@@ -47,7 +47,7 @@ resource "aws_codepipeline" "project" {
   }
 
   stage {
-    name = "BuildonCodeBuild"
+    name = "BuildOnCodeBuild"
 
     action {
       category = "Build"
