@@ -18,11 +18,12 @@ moved {
 }
 
 module "frontend_pipeline" {
-  source                 = "./modules/code_pipeline"
-  repository_name        = var.frontend_repository
-  project_name           = var.project_name
-  aws_region             = var.aws_region
-  codebuild_project_name = module.frontend_build.frontend_build_project_name
+  source                            = "./modules/code_pipeline"
+  repository_name                   = var.frontend_repository
+  project_name                      = var.project_name
+  aws_region                        = var.aws_region
+  codebuild_project_name            = module.frontend_build.docker_build_project_name
+  codebuild_pr_builder_project_name = module.frontend_build.pr_builder_project_name
 }
 
 moved {
