@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="WEB_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$/../terrfaform-fullstack-deployment" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/0.bootstrap/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/1.infrastructure/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/2.workload_account_setup/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/3.ci_cd/.terraform" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

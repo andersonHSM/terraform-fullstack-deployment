@@ -5,12 +5,5 @@ terraform {
       version = "~> 6.32"
     }
   }
-
-
-
-  backend "s3" {
-    use_lockfile = true
-    encrypt      = true
-  }
 }
 

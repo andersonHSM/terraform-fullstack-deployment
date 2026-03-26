@@ -6,3 +6,16 @@ variable "management_account_user_arn" {
 variable "environment" {
   type = string
 }
+
+variable "tfstate_region" {
+  default = ""
+}
+variable "tfstate_bucket" {
+  default = ""
+}
+variable "tfstate_key" {
+  default = ""
+}
+variable "tfstate_assume_role" {
+  default = ""
+}
