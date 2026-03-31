@@ -14,3 +14,12 @@ resource "aws_iam_role" "management_account_assume_role" {
   name               = "management_account_assume_role_${var.environment}"
   path               = "/system/"
 }
+
+module "cognito" {
+  source = "./modules/cognito"
+
+  user_pool_name  = var.user_pool_name
+  environment     = var.environment
+  app_client_name = var.app_client_name
+}
+
