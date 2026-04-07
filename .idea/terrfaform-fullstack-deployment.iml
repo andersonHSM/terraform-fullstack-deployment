@@ -8,6 +8,7 @@
       <excludeFolder url="file://$MODULE_DIR$/1.infrastructure/.terraform" />
       <excludeFolder url="file://$MODULE_DIR$/2.workload_account_setup/.terraform" />
       <excludeFolder url="file://$MODULE_DIR$/3.ci_cd/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/4.cognito/.terraform" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
